@@ -1690,11 +1690,11 @@ export function MobileHero() {
 
         {/* Heading */}
         <div style={{ marginBottom: '14px' }}>
-          <p style={{ fontFamily: font, fontWeight: 800, fontSize: '28px', lineHeight: 1.2, color: '#0f172a', margin: 0 }}>Trade gift cards at</p>
-          <p style={{ fontFamily: font, fontWeight: 800, fontSize: '28px', lineHeight: 1.2, color: '#0f172a', margin: '2px 0' }}>
+          <p className="stat-value" style={{ fontFamily: font, fontSize: '28px', lineHeight: 1.2, color: '#0f172a', margin: 0 }}>Trade gift cards at</p>
+          <p className="stat-value" style={{ fontFamily: font, fontSize: '28px', lineHeight: 1.2, color: '#0f172a', margin: '2px 0' }}>
             the <span style={{ color: '#00946c' }}>best rates</span>
           </p>
-          <p style={{ fontFamily: font, fontWeight: 800, fontSize: '28px', lineHeight: 1.2, color: '#0f172a', margin: 0 }}>in Nigeria</p>
+          <p className="stat-value" style={{ fontFamily: font, fontSize: '28px', lineHeight: 1.2, color: '#0f172a', margin: 0 }}>in Nigeria</p>
         </div>
 
         {/* Description */}
@@ -1727,9 +1727,24 @@ export function MobileHero() {
         </div>
 
         {/* Happy customers */}
-        <span style={{ fontSize: '13px', color: '#757575', fontFamily: font }}>
-          <span style={{ color: '#00946c', fontWeight: 600 }}>50,000+</span> Happy Customers
-        </span>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
+          {/* Overlapping avatar circles */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            {[
+              { bg: '#22c55e', src: heroBackgroundShape },
+              { bg: '#3b82f6', src: heroBackgroundShape1 },
+              { bg: '#f59e0b', src: heroBackgroundShape2 },
+              { bg: '#a855f7', src: heroBackgroundShape3 },
+            ].map((av, i) => (
+              <div key={i} style={{ width: 30, height: 30, borderRadius: '50%', border: '2px solid white', marginLeft: i === 0 ? 0 : -8, position: 'relative', flexShrink: 0, background: av.bg, overflow: 'hidden' }}>
+                <img src={av.src} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }} />
+              </div>
+            ))}
+          </div>
+          <span style={{ fontSize: '13px', color: '#757575', fontFamily: font, textAlign: 'center' }}>
+            <span style={{ color: '#00946c', fontWeight: 600 }}>50,000+</span> Happy Customers
+          </span>
+        </div>
       </div>
     </div>
   );
