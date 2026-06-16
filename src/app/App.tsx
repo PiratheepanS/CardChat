@@ -2,13 +2,12 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import GeneratedLandingPage, {
   Navbar, MobileNavbar,
   MobileHero, MobileStatsBar, MobileAboutSection, MobileWhyChooseUsSection,
-  MobileHowItWorksSection, MobileTestimonialsSection, MobileAppDownloadSection,
+  MobileHowItWorksSection, MobileTestimonialsSection, MobileAppDownloadSection, MobileFooter,
 } from '../imports/Frame2147238094';
 
 // Design y-position where scaled content starts on mobile.
-// Skips: hero (0–1080) + stats (1080–1275) + about (1275–2135) + why choose us (2135–3215)
-//        + how it works (3215–3795) + testimonials (3795–4835) + app download (4835–5465)
-const MOBILE_DESIGN_BASE = 5465;
+// All sections replaced — full design height; scaled container hidden on mobile.
+const MOBILE_DESIGN_BASE = 5925;
 
 export default function App() {
   const [layout, setLayout] = useState({ scale: 1, height: 0 });
@@ -105,6 +104,7 @@ export default function App() {
           <div ref={mobileAppDownloadRef}>
             <MobileAppDownloadSection />
           </div>
+          <MobileFooter />
         </>
       )}
 
