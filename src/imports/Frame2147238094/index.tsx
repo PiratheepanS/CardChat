@@ -3050,14 +3050,18 @@ function TestimonialMarquee({ children, direction = 'left' }: { children: ReactN
   const duplicated = [...children, ...children];
 
   return (
-    <div className="testimonial-marquee-track w-full overflow-hidden">
-      <div className={`testimonial-marquee ${direction === 'left' ? 'testimonial-marquee-left' : 'testimonial-marquee-right'}`}>
-        {duplicated.map((child, index) => (
-          <div key={`${direction}-${index}`} className="shrink-0">
-            {child}
-          </div>
-        ))}
+    <div style={{ position: 'relative', width: '100%' }}>
+      <div className="testimonial-marquee-track w-full overflow-hidden">
+        <div className={`testimonial-marquee ${direction === 'left' ? 'testimonial-marquee-left' : 'testimonial-marquee-right'}`}>
+          {duplicated.map((child, index) => (
+            <div key={`${direction}-${index}`} className="shrink-0">
+              {child}
+            </div>
+          ))}
+        </div>
       </div>
+      <div style={{ position: 'absolute', top: 0, left: 0, bottom: 0, width: '80px', background: 'linear-gradient(to right, white, transparent)', pointerEvents: 'none', zIndex: 2 }} />
+      <div style={{ position: 'absolute', top: 0, right: 0, bottom: 0, width: '80px', background: 'linear-gradient(to left, white, transparent)', pointerEvents: 'none', zIndex: 2 }} />
     </div>
   );
 }
