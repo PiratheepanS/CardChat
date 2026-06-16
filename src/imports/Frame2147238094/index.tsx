@@ -880,7 +880,7 @@ function GooglePlayBtnLarge() {
 
 function Group13() {
   return (
-    <div className="col-1 grid-cols-[max-content] grid-rows-[max-content] inline-grid ml-0 mt-0 place-items-start relative row-1" data-name="Group">
+    <div className="flex flex-row gap-[24px] items-center" data-name="Group">
       <AppleStoreBtn />
       <GooglePlayBtnLarge />
     </div>
@@ -899,7 +899,6 @@ function HeroStoreBtnsRow() {
   return (
     <div className="relative shrink-0">
       <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[24px] items-center leading-[0] relative size-full">
-        <Appstore />
         <Appstore1 />
       </div>
     </div>
@@ -1704,7 +1703,7 @@ export function MobileHero() {
 
         {/* App store buttons */}
         <div style={{ display: 'flex', gap: '10px', marginBottom: '20px', flexWrap: 'wrap', justifyContent: 'center' }}>
-          <button style={{ background: '#000', borderRadius: '10px', padding: '10px 16px', display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', border: 'none' }}>
+          <button className="hero-store-btn" style={{ background: '#000', borderRadius: '10px', padding: '10px 16px', display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', border: 'none', outline: 'none' }}>
             <svg viewBox="0 0 27.6748 33.1651" width="16" height="19" fill="white">
               <path d={svgPaths.p38753a20} fill="white"/>
               <path d={svgPaths.p24992f80} fill="white"/>
@@ -1714,7 +1713,7 @@ export function MobileHero() {
               <div style={{ color: 'white', fontSize: '13px', fontWeight: 600, fontFamily: font }}>App Store</div>
             </div>
           </button>
-          <button style={{ background: '#000', borderRadius: '10px', padding: '10px 16px', display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', border: 'none' }}>
+          <button className="hero-store-btn" style={{ background: '#000', borderRadius: '10px', padding: '10px 16px', display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', border: 'none', outline: 'none' }}>
             <svg viewBox="0 0 24 28" width="15" height="18" fill="none">
               <path d="M2 1.5L22 14L2 26.5V1.5Z" fill="url(#gp1)"/>
               <defs><linearGradient id="gp1" x1="2" y1="1.5" x2="22" y2="26.5" gradientUnits="userSpaceOnUse"><stop stopColor="#00A0FF"/><stop offset="1" stopColor="#32A071"/></linearGradient></defs>
@@ -2042,7 +2041,7 @@ function Count4() {
 
 function Count() {
   return (
-    <div className="content-stretch flex flex-[1_0_0] gap-[24px] items-center min-w-px relative" data-name="Count">
+    <div className="tablet-stats-grid content-stretch flex flex-[1_0_0] gap-[24px] items-center min-w-px relative" data-name="Count">
       <Count1 />
       <Count2 />
       <Count3 />
@@ -2053,7 +2052,7 @@ function Count() {
 
 function StatsBar() {
   return (
-    <div className="scroll-animate absolute bg-gradient-to-b content-stretch flex from-[#1c886f] items-center left-0 overflow-visible px-[19.53%] py-[64px] to-[#00696f] top-[1080px] w-full">
+    <div className="tablet-stats-bar scroll-animate absolute bg-gradient-to-b content-stretch flex from-[#1c886f] items-center left-0 overflow-visible px-[19.53%] py-[64px] to-[#00696f] top-[1080px] w-full">
       <Count />
     </div>
   );
@@ -2083,9 +2082,9 @@ Gift Card Platform</p>
 function ServicesSubheading() {
   return (
     <div className="flex-[2_0_0] min-w-px relative">
-      <div aria-hidden className="absolute border-[#6f797a] border-l border-solid inset-0 pointer-events-none" />
+      <div aria-hidden className="tablet-about-subheading-border absolute border-[#6f797a]  inset-0 pointer-events-none" />
       <div className="flex flex-row items-center justify-center size-full">
-        <div className="content-stretch flex items-center justify-center pl-[64px] relative size-full">
+        <div className="tablet-about-subheading-inner content-stretch flex items-center justify-center pl-[64px] relative size-full">
           <p className="[word-break:break-word] flex-[1_0_0] font-['Poppins:Regular',sans-serif] leading-[24px] min-w-px not-italic relative text-[#3f484a] text-[14px]">CardChat was founded in 2019 by a small team of traders who were tired of slow payouts, unfair rates, and shady middlemen. We set out to build the platform we wished existed — one where every trade is fast, fair, and protected.<br></br><br></br>Today, we serve over 50,000 active traders across Nigeria with verified agents, live rates, and a wallet system that pays you the moment your card is confirmed.</p>
         </div>
       </div>
@@ -2095,7 +2094,7 @@ function ServicesSubheading() {
 
 function ServicesHeader() {
   return (
-    <div className="content-stretch flex gap-[24px] items-end justify-end relative shrink-0 w-full">
+    <div className="tablet-services-header content-stretch flex gap-[24px] items-end justify-end relative shrink-0 w-full">
       <ServicesHeadingBlock />
       <ServicesSubheading />
     </div>
@@ -2117,16 +2116,16 @@ function MacBookPro1() {
         <div className="absolute bg-[#f5fafb] inset-0" />
         <img alt="" className="absolute max-w-none object-contain opacity-13 size-full" src={macBookArtworkImage} />
       </div>
-      <div className="relative h-full flex flex-col px-[375px] pt-[60px]">
-        <div className="scroll-animate"><ServicesHeader /></div>
-        <div className="flex gap-[32px] items-stretch flex-1 mt-[40px]">
-          <div className="scroll-animate-left scroll-delay-1 flex-1 min-w-0 flex items-center">
+      <div className="tablet-about-wrap relative h-full flex flex-col px-[375px] pt-[60px]">
+        <div className="tablet-about-head scroll-animate"><ServicesHeader /></div>
+        <div className="tablet-about-body flex gap-[32px] items-stretch flex-1 mt-[40px]">
+          <div className="tablet-about-cards-left scroll-animate-left scroll-delay-1 flex-1 min-w-0 flex items-center">
             <ServiceCardsLeft />
           </div>
-          <div className="scroll-animate scroll-delay-1 flex-1 min-w-0 flex justify-center items-center">
-            <img alt="" className="w-full max-h-[680px] object-contain" src={appStoreBadgeImage} />
+          <div className="tablet-about-img scroll-animate scroll-delay-1 flex-1 min-w-0 flex justify-center items-center">
+            <img alt="" className="tablet-about-girl-img w-full max-h-[680px] object-contain" src={appStoreBadgeImage} />
           </div>
-          <div className="scroll-animate-right scroll-delay-1 flex-1 min-w-0 flex items-center">
+          <div className="tablet-about-cards-right scroll-animate-right scroll-delay-1 flex-1 min-w-0 flex items-center">
             <ServiceCardsRight />
           </div>
         </div>
@@ -4403,7 +4402,7 @@ function Icon31() {
 
 function Container59() {
   return (
-    <div className="bg-[#e6f7f2] relative rounded-[12px] shrink-0 size-[36px]" data-name="Container">
+    <div className="tablet-why-card-icon bg-[#e6f7f2] relative rounded-[12px] shrink-0 size-[36px]" data-name="Container">
       <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-center justify-center relative size-full">
         <Icon31 />
       </div>
@@ -4433,7 +4432,7 @@ function Paragraph22() {
 
 function Container58() {
   return (
-    <div className="bg-[#f5fafb] content-stretch flex flex-col gap-[4px] items-start p-[25px] relative rounded-[24px] shrink-0 w-[275px]" data-name="Container">
+    <div className="tablet-why-feature-card bg-[#f5fafb] content-stretch flex flex-col gap-[4px] items-start p-[25px] relative rounded-[24px] shrink-0 w-[275px]" data-name="Container">
       <div aria-hidden className="absolute border border-[#c2ebdd] border-solid inset-0 pointer-events-none rounded-[24px]" />
       <Container59 />
       <Heading3 />
@@ -4454,7 +4453,7 @@ function Icon32() {
 
 function Container61() {
   return (
-    <div className="bg-[#e6f7f2] relative rounded-[12px] shrink-0 size-[36px]" data-name="Container">
+    <div className="tablet-why-card-icon bg-[#e6f7f2] relative rounded-[12px] shrink-0 size-[36px]" data-name="Container">
       <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-center justify-center relative size-full">
         <Icon32 />
       </div>
@@ -4484,7 +4483,7 @@ function Paragraph23() {
 
 function Container60() {
   return (
-    <div className="bg-[#f5fafb] content-stretch flex flex-col gap-[4px] items-start p-[25px] relative rounded-[24px] shrink-0 w-[274px]" data-name="Container">
+    <div className="tablet-why-feature-card bg-[#f5fafb] content-stretch flex flex-col gap-[4px] items-start p-[25px] relative rounded-[24px] shrink-0 w-[274px]" data-name="Container">
       <div aria-hidden className="absolute border border-[#c2ebdd] border-solid inset-0 pointer-events-none rounded-[24px]" />
       <Container61 />
       <Heading4 />
@@ -4495,7 +4494,7 @@ function Container60() {
 
 function ServiceFeatureRowOne() {
   return (
-    <div className="content-stretch flex gap-[24px] items-center relative shrink-0 w-full">
+    <div className="tablet-why-feature-row content-stretch flex gap-[24px] items-center relative shrink-0 w-full">
       <Container58 />
       <Container60 />
     </div>
@@ -4515,7 +4514,7 @@ function Icon33() {
 
 function Container63() {
   return (
-    <div className="bg-[#e6f7f2] relative rounded-[12px] shrink-0 size-[36px]" data-name="Container">
+    <div className="tablet-why-card-icon bg-[#e6f7f2] relative rounded-[12px] shrink-0 size-[36px]" data-name="Container">
       <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-center justify-center relative size-full">
         <Icon33 />
       </div>
@@ -4545,7 +4544,7 @@ function Paragraph24() {
 
 function Container62() {
   return (
-    <div className="bg-[#f5fafb] content-stretch flex flex-col gap-[4px] items-start p-[25px] relative rounded-[24px] shrink-0 w-[275px]" data-name="Container">
+    <div className="tablet-why-feature-card bg-[#f5fafb] content-stretch flex flex-col gap-[4px] items-start p-[25px] relative rounded-[24px] shrink-0 w-[275px]" data-name="Container">
       <div aria-hidden className="absolute border border-[#c2ebdd] border-solid inset-0 pointer-events-none rounded-[24px]" />
       <Container63 />
       <Heading5 />
@@ -4567,7 +4566,7 @@ function Icon34() {
 
 function Container65() {
   return (
-    <div className="bg-[#e6f7f2] relative rounded-[12px] shrink-0 size-[36px]" data-name="Container">
+    <div className="tablet-why-card-icon bg-[#e6f7f2] relative rounded-[12px] shrink-0 size-[36px]" data-name="Container">
       <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-center justify-center relative size-full">
         <Icon34 />
       </div>
@@ -4597,9 +4596,9 @@ function Paragraph25() {
 
 function Container64() {
   return (
-    <div className="bg-[#f5fafb] h-full relative rounded-[24px] shrink-0 w-[274px]" data-name="Container">
+    <div className="tablet-why-card-outer bg-[#f5fafb] h-full relative rounded-[24px] shrink-0 w-[274px]" data-name="Container">
       <div aria-hidden className="absolute border border-[#c2ebdd] border-solid inset-0 pointer-events-none rounded-[24px]" />
-      <div className="content-stretch flex flex-col gap-[4px] items-start p-[25px] relative size-full">
+      <div className="tablet-why-feature-card content-stretch flex flex-col gap-[4px] items-start p-[25px] relative size-full">
         <Container65 />
         <Heading6 />
         <Paragraph25 />
@@ -4610,9 +4609,9 @@ function Container64() {
 
 function ServiceFeatureRowTwo() {
   return (
-    <div className="content-stretch flex items-center justify-between relative shrink-0 w-full">
+    <div className="tablet-why-feature-row content-stretch flex items-center justify-between relative shrink-0 w-full">
       <Container62 />
-      <div className="flex flex-row items-center self-stretch">
+      <div className="tablet-why-card-wrapper flex flex-row items-center self-stretch">
         <Container64 />
       </div>
     </div>
@@ -4621,7 +4620,7 @@ function ServiceFeatureRowTwo() {
 
 function ServiceFeatureGrid() {
   return (
-    <div className="relative shrink-0 w-[573px]">
+    <div className="tablet-why-feature-grid relative shrink-0 w-[573px]">
       <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col gap-[24px] items-start relative size-full">
         <ServiceFeatureRowOne />
         <ServiceFeatureRowTwo />
@@ -4632,11 +4631,15 @@ function ServiceFeatureGrid() {
 
 function Container57() {
   return (
-    <div className="scroll-animate-right scroll-delay-1 flex-1 content-stretch flex flex-col gap-[24px] items-start w-[573px]" data-name="Container">
-      <AboutCardChatBadge />
-      <Heading2 />
-      <Paragraph21 />
-      <ServiceFeatureGrid />
+    <div className="tablet-why-content scroll-animate-right scroll-delay-1 flex-1 content-stretch flex flex-col gap-[24px] items-start w-[573px]" data-name="Container">
+      <div className="tablet-why-text flex flex-col gap-[24px] items-start w-full">
+        <AboutCardChatBadge />
+        <Heading2 />
+        <Paragraph21 />
+      </div>
+      <div className="tablet-why-cards w-full">
+        <ServiceFeatureGrid />
+      </div>
     </div>
   );
 }
@@ -4645,9 +4648,9 @@ function MacBookPro4() {
   return (
     <div className="absolute bg-[#fbfafa] h-[1080px] left-0 overflow-visible top-[2135px] w-full" data-name="MacBook Pro 16' - 7">
       <MaskGroup />
-      <div className="absolute inset-0 flex items-center gap-[24px] px-[375px]">
-        <div className="scroll-animate-left w-[571px] shrink-0" data-name="image 12">
-          <img alt="" className="w-full h-auto object-contain pointer-events-none" src={phonePreviewImage2} />
+      <div className="tablet-why-wrap absolute inset-0 flex items-center gap-[24px] px-[375px]">
+        <div className="tablet-why-img scroll-animate-left w-[571px] shrink-0" data-name="image 12">
+          <img alt="" className="tablet-why-phone-img w-full h-auto object-contain pointer-events-none" src={phonePreviewImage2} />
         </div>
         <Container57 />
       </div>

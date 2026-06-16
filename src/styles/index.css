@@ -102,13 +102,30 @@ body,
 .scroll-delay-2 { transition-delay: 300ms; }
 .scroll-delay-3 { transition-delay: 500ms; }
 
-/* Stat count values — override global 400 reset */
-.stat-value {
+/* Stat count values — override global 400 reset on both the container and all children */
+.stat-value,
+.stat-value * {
     font-weight: 800 !important;
 }
 
 .text-semibold {
     font-weight: 600 !important;
+}
+
+/* ── Mobile hero store buttons ── */
+.hero-store-btn {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.hero-store-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+}
+.hero-store-btn:active {
+    transform: scale(0.98);
+    box-shadow: none;
+}
+.hero-store-btn:focus {
+    outline: none;
 }
 
 @keyframes hero-circle-pulse {
@@ -173,4 +190,194 @@ body,
 
 .testimonial-marquee-track {
     overflow: hidden;
+}
+
+/* ── Tablet About section ──
+   Row 1: heading+desc (left col) | girl image (right col)
+   Row 2: ServiceCardsLeft (left col) | ServiceCardsRight (right col)  →  2×2 card grid
+   display:contents on tablet-about-body "unwraps" it so its children join the parent grid. */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .tablet-about-wrap {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        grid-template-rows: auto auto !important;
+        column-gap: 40px !important;
+        row-gap: 0 !important;
+        padding-top: 40px !important;
+        align-items: center !important;
+    }
+    /* Row 1, col 1 */
+    .tablet-about-head {
+        grid-column: 1 !important;
+        grid-row: 1 !important;
+    }
+    /* Unwrap body — children become direct grid items of tablet-about-wrap */
+    .tablet-about-body {
+        display: contents !important;
+    }
+    /* Row 1, col 2 — girl image */
+    .tablet-about-img {
+        grid-column: 2 !important;
+        grid-row: 1 !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+    /* Row 2, col 1 — left cards */
+    .tablet-about-cards-left {
+        grid-column: 1 !important;
+        grid-row: 2 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 16px !important;
+        min-width: 0 !important;
+    }
+    /* Row 2, col 2 — right cards */
+    .tablet-about-cards-right {
+        grid-column: 2 !important;
+        grid-row: 2 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 16px !important;
+        min-width: 0 !important;
+    }
+    /* Stack heading and description vertically */
+    .tablet-services-header {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 20px !important;
+    }
+    .tablet-services-header > * {
+        flex: none !important;
+        width: 100% !important;
+        min-width: 0 !important;
+    }
+    /* Hide vertical divider line; remove its left padding */
+    .tablet-about-subheading-border { display: none !important; }
+    .tablet-about-subheading-inner  { padding-left: 0 !important; }
+    /* Reduce girl image size */
+    .tablet-about-girl-img {
+        max-height: 480px !important;
+        width: auto !important;
+    }
+}
+
+/* ── Tablet Why Choose Us: image left | text right (row 1), feature cards 2×2 (row 2) ── */
+@media (min-width: 768px) and (max-width: 1023px) {
+    /* Switch inner wrapper to CSS grid (keep absolute inset-0 so section fills its 1080px) */
+    .tablet-why-wrap {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        grid-template-rows: auto auto !important;
+        column-gap: 40px !important;
+        row-gap: 0 !important;
+        align-items: center !important;
+        padding: 40px 375px !important;
+    }
+    /* Row 1, col 1: phone image */
+    .tablet-why-img {
+        grid-column: 1 !important;
+        grid-row: 1 !important;
+        width: auto !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+    .tablet-why-phone-img {
+        max-height: 480px !important;
+        width: auto !important;
+    }
+    /* Unwrap Container57 so its children join the parent grid */
+    .tablet-why-content {
+        display: contents !important;
+    }
+    /* Row 1, col 2: badge + heading + description */
+    .tablet-why-text {
+        grid-column: 2 !important;
+        grid-row: 1 !important;
+        align-self: center !important;
+    }
+    /* Row 2, span both cols: feature cards 2×2 */
+    .tablet-why-cards {
+        grid-column: 1 / -1 !important;
+        grid-row: 2 !important;
+        align-self: center !important;
+    }
+    /* tablet-why-cards: span both columns, auto height */
+    .tablet-why-cards {
+        grid-column: 1 / -1 !important;
+        grid-row: 2 !important;
+    }
+    /* ServiceFeatureGrid: full width */
+    .tablet-why-feature-grid {
+        width: 100% !important;
+    }
+    /* Inner wrapper → 2-column grid, rows size to content */
+    .tablet-why-feature-grid > div {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 24px !important;
+        width: 100% !important;
+    }
+    /* Dissolve rows so 4 cards become direct grid children */
+    .tablet-why-feature-row {
+        display: contents !important;
+    }
+    /* 4th card extra wrapper: also dissolve */
+    .tablet-why-card-wrapper {
+        display: contents !important;
+    }
+    /* 4th card outer div: full width */
+    .tablet-why-card-outer {
+        width: 100% !important;
+    }
+    /* Card: icon left, 16px gap, heading+desc right — height by content */
+    .tablet-why-feature-card {
+        display: grid !important;
+        grid-template-columns: 36px 1fr !important;
+        column-gap: 16px !important;
+        row-gap: 4px !important;
+        align-items: center !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        padding: 16px !important;
+        box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.05) !important;
+    }
+    /* Icon: left column, spans both text rows, vertically centred */
+    .tablet-why-card-icon {
+        grid-column: 1 !important;
+        grid-row: 1 / 3 !important;
+        align-self: center !important;
+    }
+    /* Heading and paragraph: right column, auto rows */
+    .tablet-why-feature-card > *:not(.tablet-why-card-icon):not([aria-hidden]) {
+        grid-column: 2 !important;
+        height: auto !important;
+        width: auto !important;
+    }
+    /* Remove internal top-padding and fixed heights from heading/paragraph inner divs */
+    .tablet-why-feature-card > *:not(.tablet-why-card-icon):not([aria-hidden]) > div {
+        padding-top: 0 !important;
+        height: auto !important;
+    }
+}
+
+/* ── Tablet stats bar: 2×2 grid ── */
+/* StatsBar top-[1080px], About top-[1275px] = 195px design gap.
+   Each row ~67px. Budget: 14 pad + 67 row + 30 gap + 67 row + 14 pad = 192px. */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .tablet-stats-grid {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        row-gap: 30px !important;
+        column-gap: 32px !important;
+    }
+    .tablet-stats-grid > * {
+        flex: none !important;
+        min-width: 0 !important;
+    }
+    .tablet-stats-bar {
+        padding-top: 14px !important;
+        padding-bottom: 14px !important;
+    }
 }

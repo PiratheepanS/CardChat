@@ -5,50 +5,53 @@ import GeneratedLandingPage, {
   MobileHowItWorksSection, MobileTestimonialsSection, MobileAppDownloadSection, MobileFooter,
 } from '../imports/Frame2147238094';
 
-// Design y-position where scaled content starts on mobile.
-// All sections replaced — full design height; scaled container hidden on mobile.
-const MOBILE_DESIGN_BASE = 5925;
+const DESIGN_WIDTH   = 1920;
+const DESIGN_HEIGHT  = 5925;
+const HERO_END       = 1080;  // desktop hero ends at y=1080
+const SIDE_PADDING   = 375;   // desktop left/right section padding
+const TABLET_MARGIN  = 48;    // visible left/right margin on tablet
 
 export default function App() {
-  const [layout, setLayout] = useState({ scale: 1, height: 0 });
+  const [layout, setLayout]               = useState({ scale: 1, height: 0 });
   const [showScrollTop, setShowScrollTop] = useState(false);
-  const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768);
+  const [isMobile, setIsMobile]           = useState(() => window.innerWidth < 768);
+  const [isTablet, setIsTablet]           = useState(() => window.innerWidth >= 768 && window.innerWidth < 1024);
 
-  const [mobileHeroStatsHeight,  setMobileHeroStatsHeight]  = useState(0);
+  const [mobileHeroHeight,       setMobileHeroHeight]       = useState(0);
+  const [mobileStatsHeight,      setMobileStatsHeight]      = useState(0);
   const [mobileAboutHeight,      setMobileAboutHeight]      = useState(0);
   const [mobileWhyHeight,        setMobileWhyHeight]        = useState(0);
   const [mobileHowItWorksHeight, setMobileHowItWorksHeight] = useState(0);
 
-  const mobileHeroStatsRef     = useRef<HTMLDivElement>(null);
-  const mobileAboutRef         = useRef<HTMLDivElement>(null);
-  const mobileWhyRef           = useRef<HTMLDivElement>(null);
-  const mobileHowItWorksRef    = useRef<HTMLDivElement>(null);
-  const mobileTestimonialsRef  = useRef<HTMLDivElement>(null);
-  const mobileAppDownloadRef   = useRef<HTMLDivElement>(null);
-
-  const DESIGN_WIDTH  = 1920;
-  const DESIGN_HEIGHT = 5925;
+  const mobileHeroRef         = useRef<HTMLDivElement>(null);
+  const mobileStatsRef        = useRef<HTMLDivElement>(null);
+  const mobileAboutRef        = useRef<HTMLDivElement>(null);
+  const mobileWhyRef          = useRef<HTMLDivElement>(null);
+  const mobileHowItWorksRef   = useRef<HTMLDivElement>(null);
+  const mobileTestimonialsRef = useRef<HTMLDivElement>(null);
+  const mobileAppDownloadRef  = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
-    const updateLayout = () => {
+    const update = () => {
       const vw = window.innerWidth;
-      const nextScale = vw / DESIGN_WIDTH;
-      setLayout({ scale: nextScale, height: DESIGN_HEIGHT * nextScale });
+      setLayout({ scale: vw / DESIGN_WIDTH, height: DESIGN_HEIGHT * (vw / DESIGN_WIDTH) });
       setIsMobile(vw < 768);
+      setIsTablet(vw >= 768 && vw < 1024);
     };
-    updateLayout();
-    window.addEventListener('resize', updateLayout);
-    return () => window.removeEventListener('resize', updateLayout);
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
   }, []);
 
   useEffect(() => {
+    if (isMobile || isTablet) setMobileHeroHeight(mobileHeroRef.current?.offsetHeight ?? 0);
     if (isMobile) {
-      setMobileHeroStatsHeight(mobileHeroStatsRef.current?.offsetHeight ?? 0);
+      setMobileStatsHeight(mobileStatsRef.current?.offsetHeight ?? 0);
       setMobileAboutHeight(mobileAboutRef.current?.offsetHeight ?? 0);
       setMobileWhyHeight(mobileWhyRef.current?.offsetHeight ?? 0);
       setMobileHowItWorksHeight(mobileHowItWorksRef.current?.offsetHeight ?? 0);
     }
-  }, [isMobile, layout.scale]);
+  }, [isMobile, isTablet, layout.scale]);
 
   useEffect(() => {
     const onScroll = () => setShowScrollTop(window.scrollY > 300);
@@ -56,25 +59,50 @@ export default function App() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const s = layout.scale;
+  const s = layout.scale; // vw / 1920
 
-  const mobileNavLinks = [
+  // Tablet: scale so content (1170px) fills viewport minus 48px margins on each side.
+  // transform: scale(cs) translateX(-375px) shifts design side padding off-screen.
+  const contentScale = isTablet
+    ? (s * DESIGN_WIDTH - 2 * TABLET_MARGIN) / (DESIGN_WIDTH - 2 * SIDE_PADDING) // (vw - 96) / 1170
+    : s;
+
+  const heroStatsHeight = mobileHeroHeight + mobileStatsHeight;
+
+  const navLinks = isMobile ? [
     { label: 'HOME',          href: '#home',          scrollY: 0 },
-    { label: 'ABOUT US',      href: '#about-us',      scrollY: mobileHeroStatsHeight },
-    { label: 'WHY CHOOSE US', href: '#why-choose-us', scrollY: mobileHeroStatsHeight + mobileAboutHeight },
-    { label: 'HOW IT WORKS',  href: '#how-it-works',  scrollY: mobileHeroStatsHeight + mobileAboutHeight + mobileWhyHeight },
-    { label: 'TESTIMONIALS',  href: '#testimonials',  scrollY: mobileHeroStatsHeight + mobileAboutHeight + mobileWhyHeight + mobileHowItWorksHeight },
+    { label: 'ABOUT US',      href: '#about-us',      scrollY: heroStatsHeight },
+    { label: 'WHY CHOOSE US', href: '#why-choose-us', scrollY: heroStatsHeight + mobileAboutHeight },
+    { label: 'HOW IT WORKS',  href: '#how-it-works',  scrollY: heroStatsHeight + mobileAboutHeight + mobileWhyHeight },
+    { label: 'TESTIMONIALS',  href: '#testimonials',  scrollY: heroStatsHeight + mobileAboutHeight + mobileWhyHeight + mobileHowItWorksHeight },
+  ] : [
+    // Tablet: hero replaced, rest is desktop content scaled by contentScale
+    { label: 'HOME',          href: '#home',          scrollY: 0 },
+    { label: 'ABOUT US',      href: '#about-us',      scrollY: mobileHeroHeight + (1275 - HERO_END) * contentScale },
+    { label: 'WHY CHOOSE US', href: '#why-choose-us', scrollY: mobileHeroHeight + (2135 - HERO_END) * contentScale },
+    { label: 'HOW IT WORKS',  href: '#how-it-works',  scrollY: mobileHeroHeight + (3215 - HERO_END) * contentScale },
+    { label: 'TESTIMONIALS',  href: '#testimonials',  scrollY: mobileHeroHeight + (3795 - HERO_END) * contentScale },
   ];
 
-  const scaledContentHeight = isMobile ? (DESIGN_HEIGHT - MOBILE_DESIGN_BASE) * s : layout.height;
-  const scaledContentOffset = isMobile ? -(MOBILE_DESIGN_BASE * s) : 0;
+  // Scaled container dimensions
+  const scaledHeight = isTablet
+    ? (DESIGN_HEIGHT - HERO_END) * contentScale
+    : layout.height;
+  const scaledMarginTop = isTablet
+    ? -(HERO_END * contentScale)
+    : 0;
+  const scaledTransform = isTablet
+    ? `scale(${contentScale}) translateX(-${SIDE_PADDING}px)`
+    : `scale(${s})`;
+
+  const showMobileNav = isMobile || isTablet;
 
   return (
     <div className="min-h-screen w-full overflow-x-hidden bg-white">
       {/* Navbar */}
-      {isMobile ? (
+      {showMobileNav ? (
         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000 }}>
-          <MobileNavbar links={mobileNavLinks} />
+          <MobileNavbar links={navLinks} />
         </div>
       ) : (
         <div style={{ position: 'fixed', top: 0, left: 0, width: DESIGN_WIDTH, transform: `scale(${s})`, transformOrigin: 'top left', zIndex: 1000 }}>
@@ -82,50 +110,45 @@ export default function App() {
         </div>
       )}
 
-      {/* Mobile sections rendered outside the scaled container */}
+      {/* Hero — tablet + mobile */}
+      {showMobileNav && (
+        <div ref={mobileHeroRef} style={{ paddingTop: 56 }}>
+          <MobileHero />
+        </div>
+      )}
+
+      {/* Mobile-only sections */}
       {isMobile && (
         <>
-          <div ref={mobileHeroStatsRef} style={{ paddingTop: 56 }}>
-            <MobileHero />
-            <MobileStatsBar />
-          </div>
-          <div ref={mobileAboutRef}>
-            <MobileAboutSection />
-          </div>
-          <div ref={mobileWhyRef}>
-            <MobileWhyChooseUsSection />
-          </div>
-          <div ref={mobileHowItWorksRef}>
-            <MobileHowItWorksSection />
-          </div>
-          <div ref={mobileTestimonialsRef}>
-            <MobileTestimonialsSection />
-          </div>
-          <div ref={mobileAppDownloadRef}>
-            <MobileAppDownloadSection />
-          </div>
+          <div ref={mobileStatsRef}><MobileStatsBar /></div>
+          <div ref={mobileAboutRef}><MobileAboutSection /></div>
+          <div ref={mobileWhyRef}><MobileWhyChooseUsSection /></div>
+          <div ref={mobileHowItWorksRef}><MobileHowItWorksSection /></div>
+          <div ref={mobileTestimonialsRef}><MobileTestimonialsSection /></div>
+          <div ref={mobileAppDownloadRef}><MobileAppDownloadSection /></div>
           <MobileFooter />
         </>
       )}
 
-      {/* Scaled page content — mobile: hero+stats+about+why-choose-us hidden via marginTop */}
-      <div style={{ width: '100%', height: scaledContentHeight, overflow: 'hidden' }}>
-        <div
-          className="relative overflow-visible"
-          style={{
-            width: DESIGN_WIDTH,
-            height: DESIGN_HEIGHT,
-            transform: `scale(${s})`,
-            transformOrigin: 'top left',
-            margin: 0,
-            marginTop: scaledContentOffset,
-          }}
-        >
-          <GeneratedLandingPage />
+      {/* Scaled desktop content — hidden on mobile, content-width-scaled on tablet */}
+      {!isMobile && (
+        <div style={{ width: '100%', height: scaledHeight, overflow: 'hidden', boxSizing: 'border-box', paddingLeft: isTablet ? TABLET_MARGIN : 0, paddingRight: isTablet ? TABLET_MARGIN : 0 }}>
+          <div
+            className="relative overflow-visible"
+            style={{
+              width: DESIGN_WIDTH,
+              height: DESIGN_HEIGHT,
+              transform: scaledTransform,
+              transformOrigin: 'top left',
+              marginTop: scaledMarginTop,
+            }}
+          >
+            <GeneratedLandingPage />
+          </div>
         </div>
-      </div>
+      )}
 
-      {/* Scroll to top button */}
+      {/* Scroll to top */}
       {showScrollTop && (
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
