@@ -989,21 +989,7 @@ function SupportBadge() {
 }
 
 function FeatureBadgesRow() {
-  return (
-    <div className="flex items-center">
-      <div className="inline-flex items-center gap-[12px] bg-white border border-[#c2ebdd] rounded-[12px] px-[18px] py-[12px] shadow-[0_4px_14px_rgba(0,0,0,0.08)]">
-        <div className="flex items-center justify-center rounded-[10px] shrink-0" style={{ background: 'linear-gradient(135deg, #2eba77, #026b6f)', width: 42, height: 42 }}>
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-            <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </div>
-        <div className="flex flex-col gap-[3px]">
-          <p className="[word-break:break-word] font-['Space_Grotesk',sans-serif] font-bold text-[#0f172a] text-[17px] leading-[1.2] whitespace-nowrap">Chat-Based Trading</p>
-          <p className="[word-break:break-word] font-['Space_Grotesk',sans-serif] text-[#757575] text-[13px] leading-[1.3] whitespace-nowrap">Instant · Secure · 24/7</p>
-        </div>
-      </div>
-    </div>
-  );
+  return null;
 }
 
 function Container4() {
@@ -1527,7 +1513,7 @@ export function MobileHowItWorksSection() {
   return (
     <div style={{ background: '#f5fafb', padding: '28px 20px 32px' }}>
       {/* Badge */}
-      <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '12px' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '16px' }}>
         <div style={{ background: '#e6f7f2', borderRadius: '8px', padding: '6px 16px' }}>
           <span style={{ color: '#007a59', fontSize: '12px', fontWeight: 600, fontFamily: font, letterSpacing: '2px', textTransform: 'uppercase' }}>How it Works</span>
         </div>
@@ -1714,19 +1700,6 @@ export function MobileHero() {
         <p style={{ color: '#757575', fontSize: '14px', lineHeight: 1.65, margin: '0 0 24px', fontFamily: font, maxWidth: '320px' }}>
           CardChat makes it fast, safe, and rewarding to sell your iTunes, Amazon, Steam, Google Play, and other gift cards for instant Naira payouts.
         </p>
-
-        {/* Chat-based trading badge */}
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: 'white', border: '1px solid #c2ebdd', borderRadius: '12px', padding: '10px 16px', boxShadow: '0 4px 12px rgba(0,0,0,0.08)', marginBottom: '20px' }}>
-          <div style={{ background: 'linear-gradient(135deg, #2eba77, #026b6f)', borderRadius: '8px', width: 36, height: 36, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </div>
-          <div style={{ textAlign: 'left' }}>
-            <div style={{ fontFamily: font, fontSize: '13px', fontWeight: 700, color: '#0f172a', lineHeight: 1.2 }}>Chat-Based Trading</div>
-            <div style={{ fontFamily: font, fontSize: '11px', color: '#757575', lineHeight: 1.4 }}>Instant · Secure · 24/7</div>
-          </div>
-        </div>
 
         {/* App store buttons */}
         <div style={{ display: 'flex', gap: '10px', marginBottom: '20px', flexWrap: 'wrap', justifyContent: 'center' }}>
@@ -3579,6 +3552,7 @@ function CtaAppStoreBadge() {
 function CtaAppStoreBtn() {
   return (
     <div className="bg-black col-1 content-stretch flex gap-[16px] items-center ml-0 mt-0 px-[24px] py-[16px] relative rounded-[16px] row-1 cursor-pointer transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_12px_28px_rgba(0,0,0,0.25)] active:scale-[0.98]">
+      <div aria-hidden className="absolute border border-[#33b88b] border-solid inset-0 pointer-events-none rounded-[16px]" />
       <Group21 />
       <CtaAppStoreBadge />
     </div>
@@ -3951,9 +3925,9 @@ function Appstore3() {
 
 function DownloadStoreBtnsRow() {
   return (
-    <div className="content-stretch flex gap-[12px] items-center leading-[0] relative shrink-0">
-      <Appstore2 />
-      <Appstore3 />
+    <div className="flex gap-[24px] items-center">
+      <CtaAppStoreBtn />
+      <CtaGooglePlayBtn />
     </div>
   );
 }
@@ -4723,7 +4697,7 @@ function HowItWorksSection() {
         How it Works
       </p>
        </div>
-        <div className="scroll-animate flex flex-col items-center gap-[16px] mb-[60px] text-center">
+        <div className="scroll-animate flex flex-col items-center gap-[16px] mb-[60px] mt-[16px] text-center">
           <p className="font-['Poppins:Bold',sans-serif] leading-[56px] not-italic text-[#171d1d] text-[48px]">Quick Cash for Your Gift Cards</p>
           <p className="font-['Poppins:Regular',sans-serif] leading-[32px] not-italic text-[#3f484a] text-[20px]">Turn unused gift cards into instant cash through a<br>
           </br> simple, smooth, and reliable process.</p>
