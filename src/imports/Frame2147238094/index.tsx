@@ -989,7 +989,21 @@ function SupportBadge() {
 }
 
 function FeatureBadgesRow() {
-  return null;
+  return (
+    <div className="flex items-center">
+      <div className="inline-flex items-center gap-[12px] bg-white border border-[#c2ebdd] rounded-[12px] px-[18px] py-[12px] shadow-[0_4px_14px_rgba(0,0,0,0.08)]">
+        <div className="flex items-center justify-center rounded-[10px] shrink-0" style={{ background: 'linear-gradient(135deg, #2eba77, #026b6f)', width: 42, height: 42 }}>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </div>
+        <div className="flex flex-col gap-[3px]">
+          <p className="[word-break:break-word] font-['Space_Grotesk',sans-serif] font-bold text-[#0f172a] text-[17px] leading-[1.2] whitespace-nowrap">Chat-Based Trading</p>
+          <p className="[word-break:break-word] font-['Space_Grotesk',sans-serif] text-[#757575] text-[13px] leading-[1.3] whitespace-nowrap">Instant · Secure · 24/7</p>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 function Container4() {
@@ -1615,24 +1629,24 @@ export function MobileAboutSection() {
   const font = "'Space Grotesk', 'Segoe UI', sans-serif";
   const cards = [
     {
-      icon: <svg viewBox="0 0 24 24" width="18" height="18" fill="none"><path d={svgPaths.p21997600} fill="#E6F7F2"/><path d={svgPaths.p28ba400} fill="#E6F7F2"/><path d={svgPaths.p3166380} fill="#E6F7F2"/></svg>,
+      icon: <svg viewBox="0 0 24 24" width="18" height="18" fill="none"><path d="M13 2L4.5 13H11L10 22L20.5 11H14L13 2Z" fill="#1b876f"/></svg>,
       title: 'Instant Payout',
-      desc: 'Get paid to your Nigerian bank account within minutes of trade confirmation.',
+      desc: 'Get paid directly to your Nigerian bank account within minutes of trade confirmation.',
     },
     {
-      icon: <svg viewBox="0 0 32 32" width="18" height="18" fill="none"><path d={svgPaths.p17133980} fill="#E6F7F2"/></svg>,
-      title: 'Chat-Based Trading',
-      desc: 'Trade via in-app chat. Our agents are available 24/7 to process your orders.',
+      icon: <svg viewBox="0 0 24 24" width="18" height="18" fill="none"><path d="M20 2H4C2.9 2 2 2.9 2 4V17C2 18.1 2.9 19 4 19H8L12 23L16 19H20C21.1 19 22 18.1 22 17V4C22 2.9 21.1 2 20 2Z" fill="#1b876f"/><circle cx="8" cy="10.5" r="1.3" fill="#e6f7f2"/><circle cx="12" cy="10.5" r="1.3" fill="#e6f7f2"/><circle cx="16" cy="10.5" r="1.3" fill="#e6f7f2"/></svg>,
+      title: 'Chat with customers',
+      desc: 'Trade directly through our in-app chat. Our agents are available 24/7 to process your orders.',
     },
     {
-      icon: <svg viewBox="0 0 32 32" width="18" height="18" fill="none"><path d={svgPaths.p33bf9900} fill="#E6F7F2"/><path d={svgPaths.p39360a00} fill="#E6F7F2"/></svg>,
+      icon: <svg viewBox="0 0 24 24" width="18" height="18" fill="none"><path d="M12 2L4 6V12C4 16.4 7.4 20.5 12 22C16.6 20.5 20 16.4 20 12V6L12 2Z" fill="#1b876f"/><path d="M9 12L11 14.5L15.5 10" stroke="#e6f7f2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>,
       title: 'Safe & Secure',
-      desc: 'Bank-grade security, 2FA, and end-to-end encryption on every transaction.',
+      desc: 'Bank-grade security, 2FA authentication, and end-to-end encryption protect every transaction.',
     },
     {
-      icon: <svg viewBox="0 0 24 24" width="18" height="18" fill="none"><path d={svgPaths.p3d467100} fill="#E6F7F2"/><path d={svgPaths.p1aed3b0} fill="#E6F7F2"/><path d={svgPaths.p3e039440} fill="#E6F7F2"/><path d={svgPaths.p1e557c00} fill="#E6F7F2"/></svg>,
+      icon: <svg viewBox="0 0 24 24" width="18" height="18" fill="none"><path d="M19 6H5C3.9 6 3 6.9 3 8V18C3 19.1 3.9 20 5 20H19C20.1 20 21 19.1 21 18V8C21 6.9 20.1 6 19 6Z" fill="#1b876f"/><path d="M3 11H21" stroke="#e6f7f2" strokeWidth="1.5"/><rect x="14" y="13" width="6" height="4.5" rx="1.5" fill="#e6f7f2"/><circle cx="17" cy="15.25" r="1" fill="#1b876f"/></svg>,
       title: 'Naira Wallet',
-      desc: 'Keep earnings in your in-app wallet or withdraw anytime to any Nigerian bank.',
+      desc: 'Keep your earnings in your in-app wallet or withdraw anytime to any Nigerian bank account.',
     },
   ];
   return (
@@ -1700,6 +1714,19 @@ export function MobileHero() {
         <p style={{ color: '#757575', fontSize: '14px', lineHeight: 1.65, margin: '0 0 24px', fontFamily: font, maxWidth: '320px' }}>
           CardChat makes it fast, safe, and rewarding to sell your iTunes, Amazon, Steam, Google Play, and other gift cards for instant Naira payouts.
         </p>
+
+        {/* Chat-based trading badge */}
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: 'white', border: '1px solid #c2ebdd', borderRadius: '12px', padding: '10px 16px', boxShadow: '0 4px 12px rgba(0,0,0,0.08)', marginBottom: '20px' }}>
+          <div style={{ background: 'linear-gradient(135deg, #2eba77, #026b6f)', borderRadius: '8px', width: 36, height: 36, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </div>
+          <div style={{ textAlign: 'left' }}>
+            <div style={{ fontFamily: font, fontSize: '13px', fontWeight: 700, color: '#0f172a', lineHeight: 1.2 }}>Chat-Based Trading</div>
+            <div style={{ fontFamily: font, fontSize: '11px', color: '#757575', lineHeight: 1.4 }}>Instant · Secure · 24/7</div>
+          </div>
+        </div>
 
         {/* App store buttons */}
         <div style={{ display: 'flex', gap: '10px', marginBottom: '20px', flexWrap: 'wrap', justifyContent: 'center' }}>
@@ -3190,11 +3217,9 @@ function VuesaxBoldCardSend() {
 function Container43() {
   return (
     <div className="bg-gradient-to-b content-stretch flex from-[#1b876f] items-center justify-center relative rounded-[16px] shrink-0 size-[48px] to-[#016b6f]" data-name="Container">
-      <div className="relative shrink-0 size-[24px]" data-name="card-send">
-        <div className="bg-clip-padding border-0 border-[transparent] border-solid relative size-full">
-          <VuesaxBoldCardSend />
-        </div>
-      </div>
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M13 2L4.5 13H11L10 22L20.5 11H14L13 2Z" fill="white"/>
+      </svg>
     </div>
   );
 }
@@ -3240,11 +3265,12 @@ function Container42() {
 function Container45() {
   return (
     <div className="bg-gradient-to-b content-stretch flex from-[#1b876f] items-center justify-center relative rounded-[16px] shrink-0 size-[48px] to-[#016b6f]" data-name="Container">
-      <div className="relative shrink-0 size-[24px]" data-name="flash-circle">
-        <div className="bg-clip-padding border-0 border-[transparent] border-solid relative size-full">
-          <VuesaxBoldFlashCircle />
-        </div>
-      </div>
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 2H4C2.9 2 2 2.9 2 4V17C2 18.1 2.9 19 4 19H8L12 23L16 19H20C21.1 19 22 18.1 22 17V4C22 2.9 21.1 2 20 2Z" fill="white"/>
+        <circle cx="8" cy="10.5" r="1.3" fill="#1b876f"/>
+        <circle cx="12" cy="10.5" r="1.3" fill="#1b876f"/>
+        <circle cx="16" cy="10.5" r="1.3" fill="#1b876f"/>
+      </svg>
     </div>
   );
 }
@@ -3252,7 +3278,7 @@ function Container45() {
 function H1() {
   return (
     <div className="shrink-0 w-full" data-name="h3">
-      <p className="[word-break:break-word] font-['Poppins:SemiBold',sans-serif] leading-[28px] not-italic text-[#0f172a] text-[18px] whitespace-nowrap">Chat-Based Trading</p>
+      <p className="[word-break:break-word] font-['Poppins:SemiBold',sans-serif] leading-[28px] not-italic text-[#0f172a] text-[18px] whitespace-nowrap">Chat with customers</p>
     </div>
   );
 }
@@ -3300,11 +3326,10 @@ function ServiceCardsLeft() {
 function Container49() {
   return (
     <div className="bg-gradient-to-b content-stretch flex from-[#1b876f] items-center justify-center relative rounded-[16px] shrink-0 size-[48px] to-[#016b6f]" data-name="Container">
-      <div className="relative shrink-0 size-[24px]" data-name="security">
-        <div className="bg-clip-padding border-0 border-[transparent] border-solid relative size-full">
-          <VuesaxBoldSecurity />
-        </div>
-      </div>
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2L4 6V12C4 16.4 7.4 20.5 12 22C16.6 20.5 20 16.4 20 12V6L12 2Z" fill="white"/>
+        <path d="M9 12L11 14.5L15.5 10" stroke="#1b876f" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
     </div>
   );
 }
@@ -3350,11 +3375,12 @@ function Container48() {
 function Container51() {
   return (
     <div className="bg-gradient-to-b content-stretch flex from-[#1b876f] items-center justify-center relative rounded-[16px] shrink-0 size-[48px] to-[#016b6f]" data-name="Container">
-      <div className="relative shrink-0 size-[24px]" data-name="chart">
-        <div className="bg-clip-padding border-0 border-[transparent] border-solid relative size-full">
-          <VuesaxBoldChart />
-        </div>
-      </div>
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M19 6H5C3.9 6 3 6.9 3 8V18C3 19.1 3.9 20 5 20H19C20.1 20 21 19.1 21 18V8C21 6.9 20.1 6 19 6Z" fill="white"/>
+        <path d="M3 11H21" stroke="#1b876f" strokeWidth="1.5"/>
+        <rect x="14" y="13" width="6" height="4.5" rx="1.5" fill="#1b876f"/>
+        <circle cx="17" cy="15.25" r="1" fill="white"/>
+      </svg>
     </div>
   );
 }
