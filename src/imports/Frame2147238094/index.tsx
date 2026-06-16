@@ -1390,13 +1390,17 @@ export function MobileTestimonialsSection() {
   const renderRow = (items: typeof row1, direction: 'left' | 'right') => {
     const doubled = [...items, ...items];
     return (
-      <div className="testimonial-marquee-track">
-        <div
-          className={`testimonial-marquee ${direction === 'left' ? 'testimonial-marquee-left' : 'testimonial-marquee-right'}`}
-          style={{ animationDuration: '20s', gap: '14px' }}
-        >
-          {doubled.map((t, i) => renderCard(t, `${direction}-${i}`))}
+      <div style={{ position: 'relative' }}>
+        <div className="testimonial-marquee-track">
+          <div
+            className={`testimonial-marquee ${direction === 'left' ? 'testimonial-marquee-left' : 'testimonial-marquee-right'}`}
+            style={{ animationDuration: '20s', gap: '14px' }}
+          >
+            {doubled.map((t, i) => renderCard(t, `${direction}-${i}`))}
+          </div>
         </div>
+        <div style={{ position: 'absolute', top: 0, left: 0, bottom: 0, width: '40px', background: 'linear-gradient(to right, white, transparent)', pointerEvents: 'none', zIndex: 2 }} />
+        <div style={{ position: 'absolute', top: 0, right: 0, bottom: 0, width: '40px', background: 'linear-gradient(to left, white, transparent)', pointerEvents: 'none', zIndex: 2 }} />
       </div>
     );
   };
